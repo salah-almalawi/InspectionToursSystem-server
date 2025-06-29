@@ -20,3 +20,4 @@ coverage/
 # تجاهل ملفات القفل إذا ما تحتاجها
 package-lock.json
 yarn.lock
+logs/
