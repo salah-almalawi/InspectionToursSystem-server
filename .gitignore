@@ -1,0 +1,22 @@
+# تجاهل مجلدات النظام
+.DS_Store
+
+# تجاهل node_modules
+node_modules/
+
+# تجاهل ملفات البيئة
+.env
+.env.local
+.env.*.local
+
+# تجاهل ملفات البناء المؤقتة
+dist/
+build/
+
+# تجاهل ملفات الاختبار والتقارير
+coverage/
+*.log
+
+# تجاهل ملفات القفل إذا ما تحتاجها
+package-lock.json
+yarn.lock
