@@ -29,7 +29,7 @@ const limiter = rateLimit({
 });
 
 app.use(helmet());
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(limiter);
 
 // Request logging using Winston (single entry on finish)

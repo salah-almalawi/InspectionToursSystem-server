@@ -13,7 +13,7 @@ const auth = require('../middlewares/auth');
 const validate = require('../middlewares/validate');
 const rules = require('../middlewares/validationRules');
 
-router.post('/', auth.check, validate(rules.managerCreateRules), managerCtrl.create);
+router.post('/',  validate(rules.managerCreateRules), managerCtrl.create);
 
 /**
  * @swagger
@@ -40,7 +40,8 @@ router.post('/', auth.check, validate(rules.managerCreateRules), managerCtrl.cre
  *       201:
  *         description: Manager created
  */
-router.get('/', auth.check, managerCtrl.list);
+// router.get('/', auth.check, managerCtrl.list);
+router.get('/', managerCtrl.list);
 /**
  * @swagger
  * /api/managers:
@@ -53,7 +54,7 @@ router.get('/', auth.check, managerCtrl.list);
  *       200:
  *         description: List of managers
  */
-router.get('/:id/summary', auth.check, managerCtrl.summary);
+router.get('/:id/summary', managerCtrl.summary);
 
 /**
  * @swagger
@@ -73,7 +74,7 @@ router.get('/:id/summary', auth.check, managerCtrl.summary);
  *       200:
  *         description: Manager and rounds
  */
-router.get('/:id', auth.check, managerCtrl.getById);
+router.get('/:id', managerCtrl.getById);
 /**
  * @swagger
  * /api/managers/{id}:
@@ -131,7 +132,7 @@ router.put(
  *       200:
  *         description: Updated
  */
-router.delete('/:id', auth.check, managerCtrl.remove);
+router.delete('/:id',managerCtrl.remove);
 /**
  * @swagger
  * /api/managers/{id}:
