@@ -1,4 +1,4 @@
-<%- include('../partials/header.ejs') %>
+<%- include('./partials/header.ejs') %>
 <h1>تعديل مدير</h1>
 <form action="/managers/<%= manager._id %>" method="post">
   <label>الاسم:</label><input type="text" name="name" value="<%= manager.name %>"><br>
@@ -6,4 +6,4 @@
   <label>القسم:</label><input type="text" name="department" value="<%= manager.department %>"><br>
   <button type="submit">تحديث</button>
 </form>
-<%- include('../partials/footer.ejs') %>
+<%- include('./partials/footer.ejs') %>
