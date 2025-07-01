@@ -96,9 +96,7 @@ router.get('/:id', managerCtrl.getById);
  *         description: Not found
  */
 router.put(
-  '/:id',
-  auth.check,
-  validate(rules.managerUpdateRules),
+  '/:id',  validate(rules.managerUpdateRules),
   managerCtrl.update
 );
 /**

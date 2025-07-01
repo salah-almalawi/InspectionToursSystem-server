@@ -13,7 +13,6 @@ const rules = require('../middlewares/validationRules');
 
 router.post(
   '/',
-  auth.check,
   validate(rules.roundCreateRules),
   inspectionRoundCtrl.create
 );
@@ -42,7 +41,7 @@ router.post(
  *       201:
  *         description: Round created
  */
-router.get('/', auth.check, inspectionRoundCtrl.list);
+router.get('/',  inspectionRoundCtrl.list);
 
 /**
  * @swagger
@@ -56,7 +55,7 @@ router.get('/', auth.check, inspectionRoundCtrl.list);
  *       200:
  *         description: List of rounds
  */
-router.get('/:id', auth.check, inspectionRoundCtrl.getById);
+router.get('/:id', inspectionRoundCtrl.getById);
 /**
  * @swagger
  * /api/rounds/{id}:
