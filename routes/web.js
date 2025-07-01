@@ -15,10 +15,19 @@ router.get('/managers', async (req, res) => {
   try {
     const resp = await fetch(apiUrl(req, '/api/managers'));
     const managers = await resp.json();
-    res.render('managers/index', { title: 'المديرين', managers });
+
+    let summary = null;
+    if (req.query.id) {
+      const s = await fetch(apiUrl(req, `/api/managers/${req.query.id}/summary`));
+      if (s.ok) {
+        summary = await s.json();
+      }
+    }
+
+    res.render('managers/index', { title: 'المديرين', managers, summary });
   } catch (err) {
     console.error(err);
-    res.render('managers/index', { title: 'المديرين', managers: [] });
+    res.render('managers/index', { title: 'المديرين', managers: [], summary: null });
   }
 });
 
@@ -42,6 +51,22 @@ router.post('/managers', async (req, res) => {
   }
 });
 
+// Update manager via form on main page
+router.post('/managers/update', async (req, res) => {
+  try {
+    const { id, name, rank, department } = req.body;
+    await fetch(apiUrl(req, `/api/managers/${id}`), {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, rank, department })
+    });
+    res.redirect('/managers');
+  } catch (err) {
+    console.error(err);
+    res.redirect('/managers');
+  }
+});
+
 // Edit form
 router.get('/managers/:id/edit', async (req, res) => {
   try {
@@ -61,19 +86,6 @@ router.post('/managers/:id', async (req, res) => {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(req.body)
-    });
-    res.redirect('/managers');
-  } catch (err) {
-    console.error(err);
-    res.redirect('/managers');
-  }
-});
-
-// Delete manager
-router.post('/managers/:id/delete', async (req, res) => {
-  try {
-    await fetch(apiUrl(req, `/api/managers/${req.params.id}`), {
-      method: 'DELETE'
     });
     res.redirect('/managers');
   } catch (err) {
