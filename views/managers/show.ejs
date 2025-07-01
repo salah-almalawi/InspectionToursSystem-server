@@ -1,0 +1,10 @@
+<% include ../partials/header.ejs %>
+<h1>بيانات المدير</h1>
+<p>الاسم: <%= manager.name %></p>
+<p>الرتبة: <%= manager.rank %></p>
+<p>القسم: <%= manager.department %></p>
+<a href="/managers/<%= manager._id %>/edit">تعديل</a>
+<form action="/managers/<%= manager._id %>/delete" method="post" style="display:inline;">
+  <button type="submit">حذف</button>
+</form>
+<% include ../partials/footer.ejs %>

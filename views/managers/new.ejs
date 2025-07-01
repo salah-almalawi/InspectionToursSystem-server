@@ -1,0 +1,9 @@
+<% include ../partials/header.ejs %>
+<h1>إضافة مدير</h1>
+<form action="/managers" method="post">
+  <label>الاسم:</label><input type="text" name="name"><br>
+  <label>الرتبة:</label><input type="number" name="rank" min="1" max="16"><br>
+  <label>القسم:</label><input type="text" name="department"><br>
+  <button type="submit">حفظ</button>
+</form>
+<% include ../partials/footer.ejs %></input>

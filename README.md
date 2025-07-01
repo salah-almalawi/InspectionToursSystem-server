@@ -76,9 +76,15 @@ Also require the `Authorization` header.
 ```bash
 curl -H "Authorization: Bearer <token>" \
      -H "Content-Type: application/json" \
-     -d '{"name":"Manager","rank":1,"department":"Dept"}' \
-     http://localhost:3000/api/managers
+    -d '{"name":"Manager","rank":1,"department":"Dept"}' \
+    http://localhost:3000/api/managers
 ```
+## Web Interface
+
+EJS pages are provided for basic management tasks. After starting the server
+visit `http://localhost:3000/managers` to create and edit managers through the
+same API.
+
 
 ## Running Tests
 
