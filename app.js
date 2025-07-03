@@ -1,5 +1,4 @@
 const express = require('express');
-const path = require('path');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const winston = require('./utils/logger');
@@ -13,12 +12,8 @@ require('./config/db');
 const authRouter = require('./routes/auth');
 const managerRouter = require('./routes/managers');
 const inspectionRoundRouter = require('./routes/inspectionRounds');
-const webRouter = require('./routes/web');
 
 const app = express();
-
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
 
 // Security middleware: Helmet, CORS, and rate limiting
 const allowedOriginsEnv = process.env.CORS_ALLOWED_ORIGINS;
@@ -47,7 +42,6 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
 // Swagger API docs
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
@@ -55,6 +49,5 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/api/auth', authRouter);
 app.use('/api/managers', managerRouter);
 app.use('/api/rounds', inspectionRoundRouter);
-app.use('/', webRouter);
 
 module.exports = app;
