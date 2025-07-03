@@ -1,4 +1,7 @@
 const Manager = require('../models/manager');
+const ejs = require('ejs');
+const pdf = require('html-pdf');
+const path = require('path');
 
 exports.create = async (req, res) => {
   try {
@@ -30,9 +33,28 @@ exports.summary = async (req, res) => {
     const InspectionRound = require('../models/inspectionRound');
 
     const allRounds = await InspectionRound.find()
-      .sort({ createdAt: 1 });
+      .sort({ createdAt: -1 });
 
-    res.json({ manager, allRounds });
+    const templatePath = path.join(__dirname, '..', 'views', 'managers', 'summary.ejs');
+
+    ejs.renderFile(templatePath, { manager, allRounds }, (err, html) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'خطأ في عرض القالب' });
+      }
+
+      const options = { format: 'Letter' };
+
+      pdf.create(html, options).toStream((err, stream) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ message: 'خطأ في إنشاء PDF' });
+        }
+        res.setHeader('Content-type', 'application/pdf');
+        stream.pipe(res);
+      });
+    });
+
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'خطأ في الخادم' });

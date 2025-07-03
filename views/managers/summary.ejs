@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Manager Summary</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Manager Summary</h1>
+    <h2><%= manager.name %></h2>
+    <p>Rank: <%= manager.rank %></p>
+    <p>Department: <%= manager.department %></p>
+
+    <h2>Last 6 Rounds</h2>
+    <table>
+        <tr>
+            <th>Location</th>
+            <th>Day</th>
+            <th>Date</th>
+        </tr>
+        <% manager.lastRounds.slice(0, 6).forEach(round => { %>
+            <tr>
+                <td><%= round.location %></td>
+                <td><%= round.day %></td>
+                <td><%= new Date(round.createdAt).toLocaleDateString() %></td>
+            </tr>
+        <% }) %>
+    </table>
+
+    <h2>Last 10 Rounds (All Managers)</h2>
+    <table>
+        <tr>
+            <th>Manager</th>
+            <th>Location</th>
+            <th>Day</th>
+            <th>Date</th>
+        </tr>
+        <% allRounds.slice(0, 10).forEach(round => { %>
+            <tr>
+                <td><%= round.managerName %></td>
+                <td><%= round.location %></td>
+                <td><%= round.day %></td>
+                <td><%= new Date(round.createdAt).toLocaleDateString() %></td>
+            </tr>
+        <% }) %>
+    </table>
+</body>
+</html>

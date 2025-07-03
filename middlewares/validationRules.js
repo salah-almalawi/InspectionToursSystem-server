@@ -14,18 +14,13 @@ exports.loginRules = [
 
 exports.managerCreateRules = [
     body('name').notEmpty().withMessage('الاسم مطلوب'),
-    body('rank')
-        .isInt({ min: 1, max: 16 })
-        .withMessage('الرتبة يجب أن تكون رقماً بين 1 و 16'),
+    body('rank').notEmpty().withMessage('الرتبة مطلوبة'),,
     body('department').notEmpty().withMessage('القسم مطلوب'),
 ];
 
 exports.managerUpdateRules = [
     body('name').optional().notEmpty().withMessage('الاسم مطلوب'),
-    body('rank')
-        .optional()
-        .isInt({ min: 1, max: 16 })
-        .withMessage('الرتبة يجب أن تكون رقماً بين 1 و 16'),
+    body('rank').optional().notEmpty().withMessage('الرتبة مطلوبة'),,
     body('department').optional().notEmpty().withMessage('القسم مطلوب'),
 ];
 
