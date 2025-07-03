@@ -11,7 +11,7 @@ const HijriSchema = new Schema({
 const InspectionRoundSchema = new Schema(
     {
         managerName: { type: String, required: true },
-        managerRank: { type: Number, required: true },
+        managerRank: { type: String, required: true },
         managerDepartment: { type: String, required: true },
         location: { type: String, required: true },
         day: { type: String, required: true },
