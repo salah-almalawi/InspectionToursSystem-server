@@ -111,7 +111,6 @@ exports.remove = async (req, res) => {
       query.managerRank = parsedRank;
     }
 
-    await InspectionRound.deleteMany(query);
     res.json({ message: 'تم حذف المدير' });
   } catch (err) {
     console.error(err);
