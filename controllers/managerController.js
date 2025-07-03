@@ -100,12 +100,18 @@ exports.remove = async (req, res) => {
       return res.status(404).json({ message: 'المدير غير موجود' });
     }
 
-    const InspectionRound = require('../models/inspectionRound');
-    await InspectionRound.deleteMany({
+    const InspectionRound = require('../models/inspectionRound'); // Keep this one declaration
+    const query = {
       managerName: manager.name,
-      managerRank: manager.rank,
       managerDepartment: manager.department,
-    });
+    };
+
+    const parsedRank = parseInt(manager.rank);
+    if (!isNaN(parsedRank)) {
+      query.managerRank = parsedRank;
+    }
+
+    await InspectionRound.deleteMany(query);
     res.json({ message: 'تم حذف المدير' });
   } catch (err) {
     console.error(err);
